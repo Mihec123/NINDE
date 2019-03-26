@@ -1,0 +1,48 @@
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{caption}
+
+
+\renewcommand\thesection{}
+\renewcommand\thesubsection{\thesection \alph{subsection})}
+
+
+\begin{document}
+\begin{titlepage}
+\centering
+{\scshape\LARGE Fakulteta za matematiko in fiziko \par}
+\vspace{1cm}
+{\scshape\Large Numerično integriranje in navadne diferencialne enačbe\par}
+\vspace{1.5cm}
+{\huge\bfseries 1.domača naloga\par}
+\vspace{2cm}
+{\Large\itshape Miha Avsec\par}
+\vfill
+
+\vfill
+
+% Bottom of the page
+{\large \today\par}
+\end{titlepage}
+
+
+\section{1.naloga}
+
+Prva naloga je rešena s funkcijo Adaptive\_Simpson, s pomočjo rekurzije. Na vsakem koraku izračunamo integral na danem intervalu nato, izračunamo sredinsko točko in še vrednosti integrala na vsakem kosu posebaj. Če je razlika manjša od napake naredimo še korak Richardsonove interpolacije po sledeči formuli
+$$I_{\text{nov}} = (16*I_2-I_1)/15$$.
+V nasportnem primeru rekurzivno kličemo metodo. Na vsakem koraku za izračun Simpsona uporabimo funkcijo Simpson\_fun.
+
+\section{2.naloga}
+Najprej sestavimo matriko s koeficienti in nato sledimo navodilom naloge. Matriko sestavimo s klicem funkcije generiraj\_matriko\_Gauss, ki kot vhod sprejmevelikost matrike ,krajišči intervala ter utež s pomočjo katere je podan skalarni produkt. Utež je podana v obliki matrike, kjer so elementi koeficienti polinoma. Ta funkcija pa potem kliče funkcijo Koeficienti\_orto\_poly ter zloži elemente v matriko na primerna mesta.
+
+\end{document}

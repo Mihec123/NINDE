@@ -72,6 +72,22 @@ end
 
 
 function [p,q] = enotnadolzina(p,q)
+% Opis:
+%   enotnadolzina  sprejme dve matriki(koeficiente polinomov) in jih naredi
+%   enako dolge
+%   npr. x^2 = [1,0,0], x^4 = [1,0,0,0,0] funkcija potem vrne
+%   x^2 = [0,0,1,0,0], x^4 = [1,0,0,0,0]
+%
+% Definicija:
+%   [p,q] = enotnadolzina(p,q)
+%
+% Vhodni podatki:
+%   p  matrika velikosti 1 x m
+%   q  matrika velikosti 1 x n
+%
+% Izhodni  podatek:
+%   p    matrika velikosti 1 x max(m,n)
+%   q    matrika velikosti 1 x max(m,n)
         
     if length(p) > length(q)
         dol = length(q);
