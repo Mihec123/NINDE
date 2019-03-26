@@ -12,9 +12,9 @@ plot(tocke,zeros(1,length(tocke)),'ro')
 %2.naloga
 a = 0;
 b = 4;
-utez = conv(conv([4, 0,0],[-1,4]),[-1,4]);
+utez = conv(conv([4, 0,0],[-1,4]),[-1,4]); %koeficienti polinoma, ki predstavlja utez
 seznam = [1,2,3,5,10]; %seznam n-jev za katere ra?unamo ute?i
-vrednosti = zeros(1,length(seznam));
+vrednosti = zeros(1,length(seznam));%vrednosti integralov za posamezne n
 f = @(x) x.*exp(-x);
 for i=1:length(seznam)
     n = seznam(i);
@@ -33,7 +33,7 @@ for i=1:length(seznam)
 end
 
 fun = @(x) (x.*exp(-x)).*(4*x.^2).*((4-x).^2);
-matlab = quad(fun,0,4,1e-16);
+matlab = integral(fun,a,b,'AbsTol',0,'RelTol',1e-15);
 
 razlike = abs(vrednosti-matlab); %razlika med ugrajeno matlabovo metodo in gaussovimi pravili za posamezne n
 
