@@ -1,10 +1,10 @@
-function [I,error,tocke] = Adaptive_Simpson( f,a,b,napaka,max_globina,prejsne_tocke,globina)
+function [I,error,tocke] = Adaptive_trapez( f,a,b,napaka,max_globina,prejsne_tocke,globina)
 % Opis:
 %   Adaptive_Simpson  vrne  vrednost integrala funkcije f na intervalu
 %   (a,b) preko rekurzivne adaptivne metode
 %
 % Definicija:
-%   I = Adaptive_Simpson( f,a,b,napaka,max_globina)
+%   I = Adaptive_trapez( f,a,b,napaka,max_step)
 %
 % Vhodni podatki:
 %   f   funkcija podana v obliki @(x)...
@@ -13,7 +13,6 @@ function [I,error,tocke] = Adaptive_Simpson( f,a,b,napaka,max_globina,prejsne_to
 %   napaka  pove do kaksne razlike primerjamo vrednosti integralov I_1 in
 %           I_2 na posameznih korakih (glej opis v doma?i nalogi). ?e parameter ni
 %           podan je nastavljen na 1e-6
-%   
 %   max_globina  kako globoko gremo v delitvi ce ni podan je privzeta vrednost
 %             10
 %   prejsne_tocke   delilne tocke intervala jih ne podajamo kot argument (namenjene rekurzivnim klicom same funkcije)
@@ -33,33 +32,32 @@ end
 if nargin <6
     prejsne_tocke = [];
 end
-if nargin <7
+if nargin < 7
     globina = 0;
 end
 
 
 
-I1 = Simpson_fun(f,a,b);
-polovica = (a+b)/2;
+I1 = Trapez_fun(f,a,b);
+tretina = (b-a)/3;
 
-I2 = Simpson_fun(f,a,polovica) + Simpson_fun(f,polovica,b);
+I2 = Trapez_fun(f,a,a+tretina) + Trapez_fun(f,a+tretina,a+2*tretina)+Trapez_fun(f,a+2*tretina,b);
 
-tocke = [prejsne_tocke, a,b,polovica];
+tocke = [prejsne_tocke, a,b,a+tretina,a+2*tretina];
 error = abs(I1-I2);
 
-if error > napaka && globina < max_globina
-    [I_tmp1,err1,tocke1] = Adaptive_Simpson( f,a,polovica,napaka/2,max_globina,tocke,globina+1);
-    [I_tmp2,err2,tocke2] = Adaptive_Simpson( f,polovica,b,napaka/2,max_globina,tocke,globina+1);
-    I = I_tmp1 + I_tmp2;
-    %error = max(err1,err2);
-    error = err1+err2;
-    tocke = [tocke1, tocke2];
+if (error > napaka) && (globina < max_globina)
+    [I_tmp1,err1,tocke1] = Adaptive_trapez( f,a,a+tretina,napaka/3,max_globina,tocke,globina+1);
+    [I_tmp2,err2,tocke2] = Adaptive_trapez( f,a+tretina,a+2*tretina,napaka/3,max_globina,tocke,globina+1);
+    [I_tmp3,err3,tocke3] = Adaptive_trapez( f,a+2*tretina,b,napaka/3,max_globina,tocke,globina+1);
+    I = I_tmp1 + I_tmp2 + I_tmp3;
+    %error = max([err1,err2,err3]);
+    error = err1+err2+err3;
+    tocke = [tocke1, tocke2,tocke3];
     tocke = unique(tocke);
     
 else
-    %nevem cist kako richardsonova esktrapolacija mislena
-    I = (16*I2-I1)/15;
-    error = abs(I2-I);
+    I = I2;
     
     
 end
@@ -67,4 +65,5 @@ end
 
 
 end
+
 

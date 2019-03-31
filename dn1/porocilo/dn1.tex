@@ -40,9 +40,14 @@
 
 Prva naloga je rešena s funkcijo Adaptive\_Simpson, s pomočjo rekurzije. Na vsakem koraku izračunamo integral na danem intervalu nato, izračunamo sredinsko točko in še vrednosti integrala na vsakem kosu posebaj. Če je razlika manjša od napake naredimo še korak Richardsonove interpolacije po sledeči formuli
 $$I_{\text{nov}} = (16*I_2-I_1)/15$$.
-V nasportnem primeru rekurzivno kličemo metodo. Na vsakem koraku za izračun Simpsona uporabimo funkcijo Simpson\_fun.
+V nasportnem primeru rekurzivno kličemo metodo. Na vsakem koraku za izračun Simpsona uporabimo funkcijo Simpson\_fun. Za oceno napake pa na vsakem koraku vzamemo vsoto napak dobljenih glede na naslednje delitve.
 
 \section{2.naloga}
-Najprej sestavimo matriko s koeficienti in nato sledimo navodilom naloge. Matriko sestavimo s klicem funkcije generiraj\_matriko\_Gauss, ki kot vhod sprejmevelikost matrike ,krajišči intervala ter utež s pomočjo katere je podan skalarni produkt. Utež je podana v obliki matrike, kjer so elementi koeficienti polinoma. Ta funkcija pa potem kliče funkcijo Koeficienti\_orto\_poly ter zloži elemente v matriko na primerna mesta.
+Najprej sestavimo matriko s koeficienti in nato sledimo navodilom naloge. Matriko sestavimo s klicem funkcije generiraj\_matriko\_Gauss, ki kot vhod sprejmevelikost matrike ,krajišči intervala ter utež s pomočjo katere je podan skalarni produkt. Utež je podana v obliki matrike, kjer so elementi koeficienti polinoma. Ta funkcija pa potem kliče funkcijo Koeficienti\_orto\_poly na primernih argumentih, ki izračuna koeficiente po sledeči formuli
+$$\hat{Q}_k = (x-\alpha_k)Q_{k-1} - \beta_k Q_{k-2},$$
+
+  $ Q_k = \hat{Q}_k/\beta_{k+1},$    $\beta_k = || \hat{Q}_{k-1} ||$,  $\alpha_k = <xQ_{k-1},Q_{k-1}>$.
+.
+Funkcija generiraj\_matriko\_Gauss nato te koeficiente zloži na primerna mesta v matriki.
 
 \end{document}
