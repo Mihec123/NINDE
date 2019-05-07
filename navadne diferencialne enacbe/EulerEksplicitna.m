@@ -6,7 +6,8 @@ function y = EulerEksplicitna( fun, a, b, y0, h )
 %
 %   Zgled sistema:(y'' = y'y^2-y, y(0)=1,y'(0)=0)
 %      fun = @(x,y) [y(2),y(2).*y(1).^2-y(1)];
-%      y = EulerEksplicitna( fun, 0, 0.2, [1,0], 0.1)
+%      a = 0; b= 0.2; h = 0.1; y0 = [1,0];
+%      y = EulerEksplicitna( fun, a, b, y0, h)
 %
 % Definicija:
 %   y = EulerEksplicitna( fun, a, b, y0, h )

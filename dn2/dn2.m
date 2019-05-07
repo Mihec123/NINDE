@@ -1,7 +1,7 @@
 addpath('..\navadne diferencialne enacbe')
 
-%naloga 1
-
+% % naloga 1
+% 
 % k = 2*1e-8;
 % y0=100;
 % m=8*1e6;
@@ -29,13 +29,24 @@ addpath('..\navadne diferencialne enacbe')
 
 
 
-%naloga 2
+% %naloga 2
+% 
+% fun = @(x,y) 40-20*y;
+% y0 = 3;
+% a = 0;
+% b = 2;
+% h = 1/20;
+% 
+% y = EulerEksplicitna( fun, a, b, y0, h );
+% y1 = BDF (fun, a, b, y0, h);
 
-fun = @(x,y) 40-20*y;
-y0 = 3;
+
+%naloga 3
+
 a = 0;
-b = 2;
-h = 1/20;
+b = 10;
+h = 0.05;
+y0 = [0,1];
+fun = @(x,y) [y(2),1/3*y(1)^2*y(2)-3*x*y(1)];
 
-y = EulerEksplicitna( fun, a, b, y0, h );
-y1 = BDF (fun, a, b, y0, h);
+res = MilneSistem (fun, a, b, y0, h);
