@@ -1,8 +1,27 @@
-function res = BDF (fun, a, b, y0, h)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function res = BDF (fun, a, b, y0, h,k)
+% Opis:
+%   BDF  vrne  vrednost resitve diferencialne enacbe preko implicitne
+%   k-clenske BDF metode
+%
+% Definicija:
+%   res = BDF (fun, a, b, y0, h,k)
+%
+% Vhodni podatki:
+%   fun   funkcija diferencialne enacbe podana v obliki @(x,y)...
+%   a  levo kraji??e intervala
+%   b  desno kraji??e intervala
+%   y0 zacetna vrednost za dan problem
+%   h  velikost koraka
+%   k  koliko ?lenov nazaj gledamo metodo, ce ni podan je privzeta vrednost
+%       4
+%
+% Izhodni  podatek:
+%   res  matrika velikosti length(y0) x ((b-a)/h +1) vrednosti diferencialne enacbe v
+%        x(a+i*h)
 
-k = 4;
+if nargin < 6
+    k = 4;
+end
 stevilo = 1+(b-a)/h;
 res = zeros(1,stevilo);
 
@@ -22,7 +41,6 @@ for j=1:k
     end
     koef(j+1) = (-1)^j*temp;
 end
-koef
 
 for i = k+1:stevilo
     xkord = a+(i-1-1)*h;

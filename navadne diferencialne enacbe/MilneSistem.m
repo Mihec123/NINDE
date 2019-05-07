@@ -1,6 +1,26 @@
 function res = MilneSistem (fun, a, b, y0, h)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% Opis:
+%   MilneSistem  vrne  vrednost resitve sistema diferencialnih enacb
+%   vecclenske metode tipa prediktor korektor reda 4
+%   Zgled: (y''-1/3y^2y'+3xy=0, y(0)=0,y'(0)=1)
+%       a = 0;b = 10;h = 0.05;y0 = [0,1];
+%       fun = @(x,y) [y(2),1/3*y(1)^2*y(2)-3*x*y(1)];
+%       res = MilneSistem (fun, a, b, y0, h);     
+%
+% Definicija:
+%   res = MilneSistem (fun, a, b, y0, h)
+%
+% Vhodni podatki:
+%   fun   funkcija diferencialne enacbe podana v obliki @(x,y)...
+%   a  levo kraji??e intervala
+%   b  desno kraji??e intervala
+%   y0 zacetna vrednost za dan problem
+%   h  velikost koraka
+%
+% Izhodni  podatek:
+%   res  matrika velikosti length(y0) x ((b-a)/h +1) vrednosti diferencialne enacbe v
+%        x(a+i*h)
+
 stevilo = (b-a)/h;
 k = 4;
 
