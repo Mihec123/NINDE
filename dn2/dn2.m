@@ -2,8 +2,8 @@ addpath('..\navadne diferencialne enacbe')
 format long
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% % naloga 1
-% 
+% naloga 1
+
 % k = 2*1e-8;
 % y0=100;
 % m=8*1e6;
@@ -56,17 +56,17 @@ format long
 
 %naloga 3
 
-% a = 0;
-% b = 10;
-% hji = [0.1,0.05];
-% y0 = [0,1];
-% fun = @(x,y) [y(2),1/3*y(1)^2*y(2)-3*x*y(1)];
-% 
-% for i = 1:length(hji)
-%     h = hji(i);
-%     x = [a:h:b];
-%     res = MilneSistem (fun, a, b, y0, h);
-%     figure;
-%     plot(x,res(1,:))
-%     yb = res(1,end) %y(b)
-% end
+a = 0;
+b = 10;
+hji = [0.1,0.05];
+y0 = [0,1];
+fun = @(x,y) [y(2),1/3*y(1)^2*y(2)-3*x*y(1)];
+
+for i = 1:length(hji)
+    h = hji(i);
+    x = [a:h:b];
+    res = MilneSistem (fun, a, b, y0, h);
+    figure;
+    plot(x,res(1,:))
+    yb = res(1,end) %y(b)
+end
