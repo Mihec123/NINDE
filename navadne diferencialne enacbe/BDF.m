@@ -23,10 +23,10 @@ if nargin < 6
     k = 4;
 end
 stevilo = 1+(b-a)/h;
-res = zeros(1,stevilo);
+res = zeros(length(y0),stevilo);
 
 M = [0 0 0 0 0; 1/2 1/2 0 0 0; 1/2 0 1/2 0 0; 1 0 0 1 0; 0 1/6 2/6 2/6 1/6];
-res(1:k) =  RungeKutaEksplicitnaEnoclenska( fun,a,a+(k-1)*h,y0,h,M );
+res(:,1:k) =  RungeKutaEksplicitnaEnoclenska( fun,a,a+(k-1)*h,y0,h,M );
 
 koef = zeros(1,k+1);
 temp = 0;
@@ -44,12 +44,10 @@ end
 
 for i = k+1:stevilo
     xkord = a+(i-1-1)*h;
-    fun1 = @(x) 1/koef(1)*h*fun(xkord+h,x) - sum((koef(2:end)/koef(1)).*flip(res(i-k:i-1)));
+    fun1 = @(x) 1/koef(1)*h*fun(xkord+h,x)' - sum(repmat((koef(2:end)/koef(1)),length(y0),1).*fliplr(res(:,i-k:i-1)),2);
     
-    zac = res(i-1) +h*fun(xkord,res(:,i-1)); %kaj vzet za zacetn priblizek
-    res(i) = navadnaIteracija(fun1,zac,5,1e-6);
-    
-
+    zac = res(:,i-1) +h*fun(xkord,res(:,i-1))'; %kaj vzet za zacetn priblizek
+    res(:,i) = navadnaIteracija(fun1,zac,5,1e-6);
 end
 
 end
